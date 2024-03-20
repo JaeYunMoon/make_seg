@@ -3,7 +3,7 @@ import shutil
 import glob
 
 import time
-from utils import *
+from utils.general import *
 try:
     from PIL import Image
     import cv2 

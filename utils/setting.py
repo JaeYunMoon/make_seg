@@ -23,6 +23,7 @@ def getDatasets(labels,
                 imgPath,
                 clsYaml,
                 refer,
+                setting_color,
                 new_seg,
                 allDataset = None,
                 ):
@@ -50,6 +51,7 @@ def getDatasets(labels,
                 imagePath,
                 clsYaml,
                 refer,
+                setting_color,
                 ns = 0
             )
             
@@ -69,6 +71,7 @@ class getDataInfo():
                  ImagePath,
                  clsYaml,
                  coordrefer,
+                 setting_color,
                  ns = 0
                  ) -> None:
         self.labelPath = LabelPath
@@ -76,13 +79,18 @@ class getDataInfo():
         self.referCoord = coordrefer
         self.clsYaml = clsYaml
         self.Image = ImagePath
+        self.settingcolor = setting_color
         self.ns = ns
-
+    def getImTitle(self):
+        return os.path.basename(self.labelPath)
     def getrefer(self):
         return json_dict(self.referCoord)
     
     def getclsDict(self):
         return yaml_dict(self.clsYaml)
+    
+    def getSettingColor(self):
+        return yaml_dict(self.settingcolor)
             
     def getIm(self):
         im = Image.open(self.Image)

@@ -22,14 +22,16 @@ def run(opt):
     _labels = check_dir_list(_label,"opt.lp")
     _refer_Coord = changeAbsPath(opt.ColorCoordinate,"opt.refer")
     _refer_cls = changeAbsPath(opt.ClassYaml,"opt.cls_yaml")
+    _refer_color = changeAbsPath(opt.colorSetting,"opt.cs")
 
     datsets = getDatasets(_labels,
                           _image,
                           _refer_cls,
                           _refer_Coord,
+                          _refer_color,
                           opt.CompanyTask)
     # 세그멘테이션 그리기 
-    ConfirmImage(datsets,
+    ConfirmImage(datsets.getDataset(),
                  opt.backGround,
                  opt.LineWidth,
                  )
@@ -46,6 +48,7 @@ def parser_opt(known=False):
     parser.add_argument("-b","--background",dest="backGround",type = str2bool,default=True)
     parser.add_argument("-lw","--LineWidth",dest="LineWidth",type=float,default=0.3)
     parser.add_argument("-cls_yaml","--ClassYaml",dest="ClassYaml",type=str,default="./refer/cls.yaml")
+    parser.add_argument("-cs","--colorSetting",dest ="colorSetting",type=str,default="./refer/color.yaml")
     parser.add_argument("-ct","--CompanyTask",dest="CompanyTask",type = str2bool,default=False,
                         help="엠젠 전용으로 시작하지만 유지보수를 위한 옵션, 이 옵션은 label이 json 자료형이여야 한다. 구현 아직안함")   
      
