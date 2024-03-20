@@ -44,7 +44,7 @@ def ConfirmImage(objs,backgroundColor,LineWidth):
                 poly[:,1:] = poly[:,1:]*h 
                 polygons.append(Polygon(poly))
                 color.append(c)
-                if backgroundColor:
+                if not backgroundColor:
                     p = PatchCollection(polygons, facecolor=color, linewidths=0, alpha=0.4)
                     ax.add_collection(p)
                 else:
