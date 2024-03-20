@@ -25,14 +25,15 @@ def ConfirmImage(obj,backgroundColor):
     plt.imshow(obj.getIm());plt.axis("off");ax=plt.gca()
     polygons = []
     color = [] 
-    title = Path(obj.labelPath).name
+    title = ""
+    # title = Path(obj.labelPath).name
     w,h = obj.getImageSize()
-    for ob in obj.getLabelInfo():
-        ls = [d for d in ob.strip().split(" ")]
-        coo = [re.sub("[^0-9.]","",x) for x in ls[1:]]
-        coor = [float(x) for x in coo]
+    for k,v in obj.getLabelInfo().items():
+        t = f"{k} : {len(v)}"
+        title +=t
+        coor = v
         c = (np.random.random((1, 3))*0.6+0.4).tolist()[0]
-
+        
         poly = np.array(coor,dtype=np.float32).reshape((int(len(coor)/2),2))
         poly[:,:1] = poly[:,:1]*w
         poly[:,1:] = poly[:,1:]*h 
