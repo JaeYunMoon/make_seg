@@ -36,26 +36,25 @@ def getDatasets(labels,
         labelName = os.path.basename(l)
         labelSuffix = labelPath.suffix
         labelType = checkLabelSuffix(labelSuffix)
+        
+        # 이미지 파일명 찾는 과정 
         for ip in IMAGE_FORMAT:
             n = os.path.join(imgPath,labelName.replace(labelSuffix,ip))
             if os.path.exists(n):
                 imagePath = n
+    
+    
+        data = getDataInfo(
+            labelPath,
+            labelType,
+            imagePath,
+            clsYaml,
+            refer,
+            setting_color,
+            ns = 0
+        )
         
-
-        if new_seg:
-            pass 
-        else:
-            data = getDataInfo(
-                labelPath,
-                labelType,
-                imagePath,
-                clsYaml,
-                refer,
-                setting_color,
-                ns = 0
-            )
-            
-
+    
 
         
         allDataset.addData(data)
@@ -81,6 +80,7 @@ class getDataInfo():
         self.Image = ImagePath
         self.settingcolor = setting_color
         self.ns = ns
+
     def getImTitle(self):
         return os.path.basename(self.labelPath)
     def getrefer(self):

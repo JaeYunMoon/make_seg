@@ -1,0 +1,32 @@
+{
+  "img_name": "20240119-113614.360766",
+  "car": [1],
+  "nfire": [
+    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
+  ],
+  "cone": [],
+  "car_dict": [{ "1": "SM_Pickup_zzcar" }],
+  "nfire_dict": [
+    { "2": "Sphere_nfire19" },
+    { "3": "Sphere_nfire20" },
+    { "4": "SM_StreetLamp_101_nfire" },
+    { "5": "SM_StreetLamp_103_nfire" },
+    { "6": "SM_StreetLamp_105_nfire" },
+    { "7": "SM_StreetLamp_107_nfire" },
+    { "8": "SM_StreetLamp_06_nfire" },
+    { "9": "SM_StreetLamp_109_nfire" },
+    { "10": "SM_StreetLamp_178_nfire" },
+    { "11": "SM_StreetLamp_197_nfire" },
+    { "12": "SM_StreetLamp_199_nfire" },
+    { "13": "SM_StreetLamp_201_nfire" },
+    { "14": "SM_StreetLamp_203_nfire" },
+    { "15": "SM_StreetLamp_205_nfire" },
+    { "16": "SM_StreetLamp_206_nfire" },
+    { "17": "SM_StreetLamp_207_nfire" },
+    { "18": "SM_StreetLamp_357_nfire" },
+    { "19": "SM_StreetLamp_359_nfire" },
+    { "20": "SM_StreetLamp_361_nfire" },
+    { "21": "SM_StreetLamp_375_nfire" }
+  ],
+  "cone_dict": []
+}

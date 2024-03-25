@@ -30,7 +30,7 @@ def check_dir_list(directorys:str,nameArg:str) -> List:
     dirs = directorys.replace("\\",os.sep)
     assert os.path.isdir(dirs),f"argument {nameArg} : Directory does not exist{directorys}"
     files_list = os.listdir(dirs)
-    f = [os.path.join(directorys,file) for file in files_list if file.endswith(".txt")]
+    f = [os.path.join(directorys,file) for file in files_list]
     assert not len(f) == 0,f"argument {nameArg} : .txt files does not exist in Directory{directorys}"
     
     return f

@@ -1,0 +1,18 @@
+{
+  "img_name": "20240322-111209.018985",
+  "car": [1],
+  "nfire": [2, 3, 4, 5],
+  "cone": [6, 7, 8],
+  "car_dict": [{ "1": "SM_Crossover_zzcar3" }],
+  "nfire_dict": [
+    { "2": "nfireA14" },
+    { "3": "nfireA15" },
+    { "4": "nfireA17" },
+    { "5": "nfireA20" }
+  ],
+  "cone_dict": [
+    { "6": "SM_TrafficCone12_cone6" },
+    { "7": "SM_TrafficCone12_cone8" },
+    { "8": "SM_TrafficCone12_cone7" }
+  ]
+}
