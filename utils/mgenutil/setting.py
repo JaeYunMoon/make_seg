@@ -86,8 +86,15 @@ class setDataInfo:
             clsInfo_dcit[v.lower()] = c
 
         return clsInfo_dcit 
-            
-    def getLableType(self):
+    def getLabelName(self):
+        return os.path.basename(self.label)
+    def getYoloName(self):
+        if self.labelType == LabelFormat.JSONForm:
+            return os.path.basename(self.label).replace(".json",".txt")
+        elif self.labelType == LabelFormat.TXTForm:
+            return self.getLabelName
+    
+    def getLabelType(self):
         return self.labelType
     
     def getImg(self):

@@ -28,7 +28,7 @@ def run(opt):
                           _refer_cls,
                           _refer_Coord,
                           _refer_color,
-                          opt.CompanyTask)
+                          )
     # 세그멘테이션 그리기 
     ConfirmImage(datsets.getDataset(),
                  opt.backGround,

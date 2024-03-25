@@ -24,7 +24,6 @@ def getDatasets(labels,
                 clsYaml,
                 refer,
                 setting_color,
-                new_seg,
                 allDataset = None,
                 ):
     

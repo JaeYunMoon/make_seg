@@ -1,5 +1,6 @@
 import os 
 import argparse
+import time 
 
 from utils.mgenutil.setting import getDatasets
 from utils.general import changeAbsPath,check_dir_list,path_confirm,str2bool
@@ -12,8 +13,8 @@ def parser_opt(known=False):
     parser.add_argument("-ip",'--ImagePath',dest = "ImagePath",type=str,default="./images",help = "Filse (image) directory path")
    
     parser.add_argument("-refer","--colorCoordinate",dest ="ColorCoordinate",type=str,default="./refer/img_coor.json",help ="Dictionary : Unreal color coordinate")
-    parser.add_argument("-b","--background",dest="backGround",type = str2bool,default=True)
-    parser.add_argument("-lw","--LineWidth",dest="LineWidth",type=float,default=0.3)
+    # parser.add_argument("-b","--background",dest="backGround",type = str2bool,default=True)
+    # parser.add_argument("-lw","--LineWidth",dest="LineWidth",type=float,default=0.3)
     parser.add_argument("-cls_set","--ClassYaml",dest="ClassYaml",type=str,default="./refer/cls.yaml")
     parser.add_argument("-colo_set","--colorSetting",dest ="colorSetting",type=str,default="./refer/color.yaml")
     parser.add_argument("-sr","--saveRoot",dest='SavePath',type=str,default="./result/")
@@ -48,9 +49,12 @@ def main(opt):
         _refer_color
     )
 
-    drawSeg(dataset.getDataset(),_refer_Coord,newSegImgSave)
+    drawSeg(dataset.getDataset(),_refer_Coord,newSegImgSave,yoloSave)
 
 
 if __name__ == "__main__":
+    start = time.time()
     opt = parser_opt(True)
     main(opt)
+    end = time.time()
+    print(f"{end-start:.5f} sec")
