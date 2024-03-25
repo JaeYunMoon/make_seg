@@ -1,7 +1,7 @@
 import os 
 import numpy as np 
 import cv2
-from ..general import json_dict
+from ..general import json_dict,logger
 
 def drawSeg(datasets,referCoord,save_root,txtSaveRoot):
    
@@ -40,7 +40,7 @@ def segDrawObjectContour(datasets,refer,saveroot,txtSavePath):
                         contour_merge.append(s)
                         if len(contour_merge) >1:
                             if len(contour_merge) > 2:
-                                print(f"동일 객체 3등분 {data.getImg()} {idx}")
+                                logger.info(f"동일 객체 3등분 {data.getImg()} {idx}")
                             s1 = merge_multi_segment(contour_merge)
                             
                             s1 = (np.concatenate(s1,axis=0) / np.array([w,h])).reshape(-1).tolist()
@@ -223,7 +223,7 @@ def YoloConvertFireSmoke(datasets,refer,saveroot):
                 else:
                     if len(contours) > 1: # 가장 큰 연기 or 불만 잡는 조건문
                         if len(contours) > 2:
-                            print(f"동일 객체 3등분 {data.getImg()} {cls}")
+                            logger.info(f"동일 객체 3등분 {data.getImg()} {cls}")
                         idx = 0
                         m = 0 
                         for i,x in enumerate(contours):

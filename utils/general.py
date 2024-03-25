@@ -3,6 +3,7 @@ from typing import List
 import argparse
 from enum import Enum
 import json
+import logging 
 
 try:
     import yaml 
@@ -79,7 +80,19 @@ def yaml_dict(ypth):
         data = yaml.load(f,Loader=yaml.FullLoader)
     return data 
 
+
 class LabelFormat(Enum):
     TXTForm = 1
     JSONForm =2 
 
+if not os.path.exists(f"./log"):
+    os.makedirs(f"./log")
+
+filehandler = logging.FileHandler(
+    f"./log/logging.log"
+)
+streamhandler = logging.StreamHandler()
+logger = logging.getLogger("")
+logger.setLevel(logging.INFO)
+logger.addHandler(filehandler)
+logger.addHandler(streamhandler)

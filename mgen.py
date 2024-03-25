@@ -3,8 +3,9 @@ import argparse
 import time 
 
 from utils.mgenutil.setting import getDatasets
-from utils.general import changeAbsPath,check_dir_list,path_confirm,str2bool
+from utils.general import changeAbsPath,check_dir_list,path_confirm,str2bool,logger
 from utils.mgenutil.func import drawSeg
+
 
 def parser_opt(known=False):
     parser = argparse.ArgumentParser()
