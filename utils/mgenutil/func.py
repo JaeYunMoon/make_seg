@@ -29,7 +29,7 @@ def segDrawObjectContour(datasets,refer,saveroot,txtSavePath):
                     img_mask = cv2.inRange(data.getsegIm(),coor,coor)
                 
                     # print(img_mask)
-                    contours,_ = cv2.findContours(img_mask,cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)
+                    contours,_ = cv2.findContours(img_mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
                     
                     if not contours:
                         pass
@@ -84,7 +84,7 @@ def segDrawFireSmokeContour(datasets,refer,saveroot,fire = True):
 def segFindandDraw(data,newSeg,newSegPath,coord,coordbgr,epsilon = 0.0006,extra_pixels = 1):
     coor = np.array([coordbgr[2],coordbgr[1],coordbgr[0]],dtype="int64")
     img_mask = cv2.inRange(data.getsegIm(),coor,coor)
-    contours,_=cv2.findContours(img_mask,cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)
+    contours,_=cv2.findContours(img_mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
     if not contours:
         pass 
@@ -217,7 +217,7 @@ def YoloConvertFireSmoke(datasets,refer,saveroot):
                 coord_bgr = list(refer[str(coord)])
                 coor = np.array([coord_bgr[2],coord_bgr[1],coord_bgr[0]],dtype="int64")
                 img_mask = cv2.inRange(data.getsegIm(),coor,coor)
-                contours,_=cv2.findContours(img_mask,cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)
+                contours,_=cv2.findContours(img_mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
                 if not contours:
                     pass 
                 else:
