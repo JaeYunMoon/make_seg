@@ -21,8 +21,8 @@ except:
 def drawNewSeg(js,new_seg_folder):
     pass 
 
-def ConfirmImage(objs,backgroundColor,LineWidth):
-    save_root = path_confirm("./result")
+def ConfirmImage(objs,backgroundColor,LineWidth,saveRoot):
+    save_root = saveRoot
     for obj in tqdm(objs):
     
         plt.imshow(obj.getIm());plt.axis("off");ax=plt.gca()

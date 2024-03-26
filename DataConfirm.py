@@ -22,7 +22,7 @@ def run(opt):
     _refer_Coord = changeAbsPath(opt.ColorCoordinate,"opt.refer")
     _refer_cls = changeAbsPath(opt.ClassYaml,"opt.cls_yaml")
     _refer_color = changeAbsPath(opt.colorSetting,"opt.cs")
-
+    _saveRoot = changeAbsPath(opt.saveRoot,"opt.sr")
     datsets = getDatasets(_labels,
                           _image,
                           _refer_cls,
@@ -33,6 +33,7 @@ def run(opt):
     ConfirmImage(datsets.getDataset(),
                  opt.backGround,
                  opt.LineWidth,
+                 _saveRoot,
                  )
     
     
