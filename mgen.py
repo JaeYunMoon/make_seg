@@ -2,9 +2,10 @@ import os
 import argparse
 import time 
 
+import DataConfirm 
 from utils.mgenutil.setting import getDatasets
-from utils.general import changeAbsPath,check_dir_list,path_confirm,str2bool,logger
-from utils.mgenutil.func import drawSeg
+from utils.general import changeAbsPath,check_dir_list,path_confirm,str2bool
+from utils.mgenutil.func import drawSeg,logger
 
 
 def parser_opt(known=False):
@@ -22,7 +23,10 @@ def parser_opt(known=False):
     
     # mgen 추가적인 option 
     parser.add_argument("-seg",'--SegImgPath',dest = "SegImPath",type=str,default="./seg",help = "Filse (seg image) directory path")
-    
+    parser.add_argument("--confrim_image",dest="confirmImage",type=str2bool,default=False,help="yolo 라벨링 확인하는 옵션")
+    parser.add_argument("-b","--background",dest="backGround",type = str2bool,default=True)
+    parser.add_argument("-lw","--LineWidth",dest="LineWidth",type=float,default=0.3)
+
     args = parser.parse_args()
     return parser.parse_known_args()[0] if known else parser.parse_args()
 
@@ -51,7 +55,21 @@ def main(opt):
     )
 
     drawSeg(dataset.getDataset(),_refer_Coord,newSegImgSave,yoloSave)
-
+    if opt.confirmImage:
+        # option = {"backGround" : opt.backGround,
+        #           "LineWidth" : opt.LineWidth,
+                #   "ImagePath" : _image,
+                #   "LabelPath" : yoloSave,
+                #   "ColorCoordinate":_refer_Coord,
+                #   "ClassYaml":_refer_cls,
+                #   "colorSetting" : _refer_color,
+                #   "saveRoot" : confirmImgSave}
+        
+        # DataConfirm.run(LabelPath = yoloSave, ImagePath = _image, background = opt.backGround,
+        #                 LineWidth = opt.LineWidth, colorCoordinate = _refer_Coord, ClassYaml = _refer_cls,colorSetting=_refer_color,
+        #                 saveRoot = confirmImgSave)
+        logger.info("Generation Confrim Image")
+        os.system(f"python DataConfirm.py -ip {_image} -lp {yoloSave} -refer {_refer_Coord} -cls_set {_refer_cls} -color_set {_refer_color} -sr {confirmImgSave}")
 
 if __name__ == "__main__":
     start = time.time()

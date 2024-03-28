@@ -15,7 +15,7 @@ except:
     os.system("pip install opencv-python")
     
 
-def run(opt):
+def main(opt):
     _label = changeAbsPath(opt.LabelPath,"opt.lp")
     _image = changeAbsPath(opt.ImagePath,"opt.ip")
     _labels = check_dir_list(_label,"opt.lp")
@@ -49,7 +49,7 @@ def parser_opt(known=False):
     parser.add_argument("-b","--background",dest="backGround",type = str2bool,default=True)
     parser.add_argument("-lw","--LineWidth",dest="LineWidth",type=float,default=0.3)
     parser.add_argument("-cls_set","--ClassYaml",dest="ClassYaml",type=str,default="./refer/cls.yaml")
-    parser.add_argument("-colo_set","--colorSetting",dest ="colorSetting",type=str,default="./refer/color.yaml")
+    parser.add_argument("-color_set","--colorSetting",dest ="colorSetting",type=str,default="./refer/color.yaml")
     parser.add_argument("-sr","--saveRoot",dest="saveRoot",type=str,default="./result")
      
     
@@ -64,10 +64,18 @@ def UnrealColorCoord(ColorCoordinate):
     img_coor_json = json_dict(ColorCoordinate)
     return img_coor_json
 
+def run(**kwargs):
+    # Usage: import train; train.run(data='coco128.yaml', imgsz=320, weights='yolov5m.pt')
+    option = parser_opt(True)
+    for k, v in kwargs.items():
+        setattr(option, k, v)
+    main(option)
+    return option
+
 if __name__ =="__main__":
     start = time.time()
     opt = parser_opt(True)
-    run(opt)
+    main(opt)
     end = time.time()
     print(f"{end-start:.5f} sec")
 

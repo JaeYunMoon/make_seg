@@ -1,9 +1,10 @@
 import os 
 import numpy as np 
 import cv2
-from ..general import json_dict,logger
+from ..general import json_dict
 from tqdm import tqdm 
 import logging 
+import time
 
 def drawSeg(datasets,referCoord,save_root,txtSaveRoot):
    

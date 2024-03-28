@@ -22,6 +22,13 @@ git clone https://github.com/JaeYunMoon/make_seg.git
 위 파일들을 이동 시키면 된다. 
 
 # 옵션 
+
+- 아래 코드 줄 경로만 변경해서 실행, confrim image까지 한번에 진행 DataConfrim.py 따로 실행 안해도 됨.
+
+```
+python mgen.py -ip C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_seg\datasets\train\images -lp C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_seg\datasets\json -seg C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_seg\datasets\seg --confrim_image T
+```
+
 ## 파이썬 실행 시 Argument
 
 | Argument &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Description | Example | Default |
@@ -35,3 +42,4 @@ git clone https://github.com/JaeYunMoon/make_seg.git
 | `-colo_set`,<br>`--colorSetting` | 딕셔너리 형태의 Yaml파일.<br> 라벨마다 다른 색상 값을 부여하는 설정 값| `python mgen.py -cs ./refer/color.yaml` | ./refer/color.yaml |
 | `-sr`,<br>`--SaveRoot` | 추가 예정 | `python mgen.py -sr /home/my_results/` | `results/` |  
 | `-seg`,<br>`--SegImPath` | Directory that contains the Segmentation Image data | `python mgen.py -seg  ./seg` |`./seg`|  
+
