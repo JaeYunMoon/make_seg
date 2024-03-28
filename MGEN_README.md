@@ -26,7 +26,7 @@ git clone https://github.com/JaeYunMoon/make_seg.git
 - 아래 코드 줄 경로만 변경해서 실행, confrim image까지 한번에 진행 DataConfrim.py 따로 실행 안해도 됨.
 
 ```
-python mgen.py -ip C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_seg\datasets\train\images -lp C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_seg\datasets\json -seg C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_seg\datasets\seg --confrim_image T
+python mgen.py -ip C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_seg\datasets\train\images -lp C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_seg\datasets\json -seg C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_seg\datasets\seg --confirm_image T
 ```
 
 ## 파이썬 실행 시 Argument
@@ -41,5 +41,9 @@ python mgen.py -ip C:\Users\sim2real\Desktop\personalProject\dataconfirm\make_se
 | `-cls_set`,<br>`--ClassYaml` | 딕셔너리 형태의 Yaml파일.<br> Label에 있는 라벨링 번호(key 값)와 라벨링에 해당하는 객체 명사 | `python mgen.py -cls_yaml ./refer/cls.yaml` | ./refer/cls.yaml |  
 | `-colo_set`,<br>`--colorSetting` | 딕셔너리 형태의 Yaml파일.<br> 라벨마다 다른 색상 값을 부여하는 설정 값| `python mgen.py -cs ./refer/color.yaml` | ./refer/color.yaml |
 | `-sr`,<br>`--SaveRoot` | 추가 예정 | `python mgen.py -sr /home/my_results/` | `results/` |  
-| `-seg`,<br>`--SegImPath` | Directory that contains the Segmentation Image data | `python mgen.py -seg  ./seg` |`./seg`|  
+| `-seg`,<br>`--SegImPath` | Directory that contains the Segmentation Image data | `python mgen.py -seg  ./seg` |`./seg`| 
+| `-b`,<br>`--background` | 라벨 표시 할 때 테두리 내부 색상 입력 옵셥 True,False | `python mgen.py -b True` | `True` | |  
+| `-lw`,<br>`--LineWidth` | 라벨 표시 할 때 테두리 두께 0.0~0.9 사이의 값 |  `python mgen.py -lw 0.5` | `0.3` |  
+| `--confirm_image` | yolo 라벨링 확인하는 옵션  | `python mgen.py --confirm_image T` | `` |  
+
 

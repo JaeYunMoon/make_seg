@@ -23,7 +23,7 @@ def parser_opt(known=False):
     
     # mgen 추가적인 option 
     parser.add_argument("-seg",'--SegImgPath',dest = "SegImPath",type=str,default="./seg",help = "Filse (seg image) directory path")
-    parser.add_argument("--confrim_image",dest="confirmImage",type=str2bool,default=False,help="yolo 라벨링 확인하는 옵션")
+    parser.add_argument("--confirm_image",dest="confirmImage",type=str2bool,default=False,help="yolo 라벨링 확인하는 옵션")
     parser.add_argument("-b","--background",dest="backGround",type = str2bool,default=True)
     parser.add_argument("-lw","--LineWidth",dest="LineWidth",type=float,default=0.3)
 
