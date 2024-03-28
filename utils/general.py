@@ -3,8 +3,9 @@ from typing import List
 import argparse
 from enum import Enum
 import json
-import logging 
 
+from pathlib import Path
+import time 
 try:
     import yaml 
     from easydict import EasyDict as edict
@@ -88,11 +89,3 @@ class LabelFormat(Enum):
 if not os.path.exists(f"./log"):
     os.makedirs(f"./log")
 
-filehandler = logging.FileHandler(
-    f"./log/logging.log"
-)
-streamhandler = logging.StreamHandler()
-logger = logging.getLogger("")
-logger.setLevel(logging.INFO)
-logger.addHandler(filehandler)
-logger.addHandler(streamhandler)

@@ -2,6 +2,8 @@ import os
 import numpy as np 
 import cv2
 from ..general import json_dict,logger
+from tqdm import tqdm 
+import logging 
 
 def drawSeg(datasets,referCoord,save_root,txtSaveRoot):
    
@@ -13,13 +15,14 @@ def drawSeg(datasets,referCoord,save_root,txtSaveRoot):
     
 
 def segDrawObjectContour(datasets,refer,saveroot,txtSavePath):
-    for data in datasets:
+    for data in tqdm(datasets,desc = "Generating Object segmentation images and labels : "):
         segments =[]
         new_seg = np.zeros(data.getsegImSize(),dtype=np.uint8)  
         dict = data.getcolorInfo()
         clsdict = {v.lower():k for k,v in data.clsInfo.items()}
         h,w,c = data.getsegImSize()
         for idx,coord in dict.items():
+            # print(idx,coord)
             if isinstance(coord,list):
                 for i in coord:
                     contour_merge = []
@@ -38,19 +41,18 @@ def segDrawObjectContour(datasets,refer,saveroot,txtSavePath):
                         
                         s = seg_flatten(c)
                         contour_merge.append(s)
-                        if len(contour_merge) >1:
-                            if len(contour_merge) > 2:
-                                logger.info(f"동일 객체 3등분 {data.getImg()} {idx}")
-                            s1 = merge_multi_segment(contour_merge)
-                            
-                            s1 = (np.concatenate(s1,axis=0) / np.array([w,h])).reshape(-1).tolist()
-                        else:
-                            s1 = (j for i in contour_merge for j in i)
-                            s1 = (np.array(list(s1)).reshape(-1,2)/np.array([w,h])).reshape(-1).tolist()
+                    if len(contour_merge) >1:
+                        if len(contour_merge) > 2:
+                            logger.info(f"동일 객체 3등분 {data.getImg()} {idx}")
+                        s1 = merge_multi_segment(contour_merge)
+                        s1 = (np.concatenate(s1,axis=0) / np.array([w,h])).reshape(-1).tolist()
+                    else:
+                        s1 = (j for i in contour_merge for j in i)
+                        s1 = (np.array(list(s1)).reshape(-1,2)/np.array([w,h])).reshape(-1).tolist()
 
-                        s1 = [idx]+s1
-                        if s1 not in segments:
-                            segments.append(s1)
+                    s1 = [idx]+s1
+                    if s1 not in segments:
+                        segments.append(s1)
 
                 newSegPath = os.path.join(saveroot,data.getImg())
                 cv2.imwrite(newSegPath,new_seg)
@@ -67,7 +69,7 @@ def segDrawObjectContour(datasets,refer,saveroot,txtSavePath):
                         f.write("\n")
                     
 def segDrawFireSmokeContour(datasets,refer,saveroot,fire = True):
-    for data in datasets:
+    for data in tqdm(datasets, desc="Generating Fire&Smoke segmentation images : "):
         newSegPath = os.path.join(saveroot,data.getImg())
         newSeg = cv2.imread(newSegPath)
         dict = data.getcolorInfo()
@@ -148,7 +150,7 @@ def seg_flatten(poly):
 
 def min_index(arr1, arr2):
     dis = ((arr1[:, None, :] - arr2[None, :, :]) ** 2).sum(-1)
-    print(dis)
+    #print(dis)
     return np.unravel_index(np.argmin(dis, axis=None), dis.shape)
 
 def merge_multi_segment(segments):
@@ -201,7 +203,7 @@ def merge_multi_segment(segments):
 
 def YoloConvertFireSmoke(datasets,refer,saveroot):
     
-    for data in datasets:
+    for data in tqdm(datasets,desc="Generating fire&smoke labels : "):
         segments =[]
         new_seg = np.zeros(data.getsegImSize(),dtype=np.uint8)  
         dict = data.getcolorInfo()
@@ -222,8 +224,8 @@ def YoloConvertFireSmoke(datasets,refer,saveroot):
                     pass 
                 else:
                     if len(contours) > 1: # 가장 큰 연기 or 불만 잡는 조건문
-                        if len(contours) > 2:
-                            logger.info(f"동일 객체 3등분 {data.getImg()} {cls}")
+                        # if len(contours) > 2:
+                        #     logger.info(f"동일 객체 3등분 {data.getImg()} {cls}")
                         idx = 0
                         m = 0 
                         for i,x in enumerate(contours):
@@ -261,4 +263,11 @@ def YoloConvertFireSmoke(datasets,refer,saveroot):
                     f.write(f"{x} ")
                 f.write("\n")
 
-                    
+filehandler = logging.FileHandler(
+    f"./log/{time.localtime().tm_year}_{time.localtime().tm_mon}_{time.localtime().tm_mday}_{time.localtime().tm_hour}_{time.localtime().tm_min}_{time.localtime().tm_sec}.log"
+)
+streamhandler = logging.StreamHandler()
+logger = logging.getLogger("")
+logger.setLevel(logging.INFO)
+logger.addHandler(filehandler)
+logger.addHandler(streamhandler)
