@@ -41,8 +41,10 @@ def getDatasets(labels,
             n = os.path.join(imgPath,labelName.replace(labelSuffix,ip))
             if os.path.exists(n):
                 imagePath = n
+            else:
+                raise NameError,f"{n} Path does not exist. Please check the Path"
     
-    
+
         data = getDataInfo(
             labelPath,
             labelType,
@@ -52,6 +54,7 @@ def getDatasets(labels,
             setting_color,
             ns = 0
         )
+
         
     
 
@@ -81,7 +84,7 @@ class getDataInfo():
         self.ns = ns
 
     def getImTitle(self):
-        return os.path.basename(self.labelPath)
+        return os.path.basename(self.Image)
     def getrefer(self):
         return json_dict(self.referCoord)
     

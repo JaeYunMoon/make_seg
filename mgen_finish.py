@@ -29,14 +29,14 @@ def main(opt):
     _seg = changeAbsPath(opt.SegImage,"-seg")
     _segs = check_dir_list(_seg,"-seg")
     
-    _savepath = path_confirm(opt.SavePath)
+    _savepath = path_confirm(opt.SaveRoot)
     _sr = changeAbsPath(_savepath,"-sr")
     removetxt = os.path.join(_sr,"Remove.txt") 
     removeTxt = compare_and_record(_image,_confirmIm,removetxt)
 
-    _image_remove = moveFile(_image,removeTxt,opt.fileMove,"images")
-    _label_remove = moveFile(_label,removeTxt,opt.fileMove,"label",".txt")
-    _seg_remove = moveFile(_seg,removeTxt,opt.fileMove,"chroma")
+    _image_remove = moveFile(_image,removeTxt,opt.fileMove,_sr,"images")
+    _label_remove = moveFile(_label,removeTxt,opt.fileMove,_sr,"label",".txt")
+    _seg_remove = moveFile(_seg,removeTxt,opt.fileMove,_sr,"chroma")
     # 크로마 이미지 저장소 
     # copy 이미지 저장소 
     # txt파일로 항목 확인 후 지울지 copy할지 

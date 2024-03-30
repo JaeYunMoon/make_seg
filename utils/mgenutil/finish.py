@@ -2,6 +2,7 @@ import os
 import shutil
 from ..general import path_confirm
 import cv2 
+from tqdm import tqdm
     
 # origin 과 confrim image file list를 읽어와서 
 # 없는 것들은 remove.txt 파일에 쓰고, 라인 확인 후 차이 맞으면 
@@ -25,14 +26,14 @@ def compare_and_record(folder1, folder2, output_file):
     
     return output_file
 
-def moveFile(folder1,txtFile,move,name,suffix=".png"):
+def moveFile(folder1,txtFile,move,saveRoot,name,suffix=".png"):
     with open(txtFile, 'r') as file:
         files_to_delete = file.read().splitlines()
     if move:
-        move_save = path_confirm(f"./result/removeFile/{name}/")
+        move_save = path_confirm(f"{saveRoot}/removeFile/{name}/")
         print(f"MoveDirectorys : {move_save}",)
     deleted_files_count = 0 
-    for file_name in files_to_delete:
+    for file_name in tqdm(files_to_delete,desc="File removimg :"):
         file_name = file_name.replace(".png",suffix)
         file_path = os.path.join(folder1, file_name)
         if os.path.exists(file_path):

@@ -55,7 +55,7 @@ def ConfirmImage(objs,backgroundColor,LineWidth,saveRoot):
 
         plt.title(str(title))
         # print(str(obj.getImTitle()))
-        save = os.path.join(save_root,f"{str(obj.getImTitle())}.png")
+        save = os.path.join(save_root,f"{str(obj.getImTitle())}")
         
         plt.savefig(save,bbox_inches='tight', pad_inches=0,dpi = 300)
         plt.clf()

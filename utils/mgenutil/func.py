@@ -44,7 +44,7 @@ def segDrawObjectContour(datasets,refer,saveroot,txtSavePath):
                         contour_merge.append(s)
                     if len(contour_merge) >1:
                         if len(contour_merge) > 2:
-                            logger.info(f"동일 객체 3등분 {data.getImg()} {idx}")
+                            logger.info(f"Occurrence of 3 equal parts of objects {idx} {data.getImg()}")
                         s1 = merge_multi_segment(contour_merge)
                         s1 = (np.concatenate(s1,axis=0) / np.array([w,h])).reshape(-1).tolist()
                     else:

@@ -65,7 +65,6 @@ def UnrealColorCoord(ColorCoordinate):
     return img_coor_json
 
 def run(**kwargs):
-    # Usage: import train; train.run(data='coco128.yaml', imgsz=320, weights='yolov5m.pt')
     option = parser_opt(True)
     for k, v in kwargs.items():
         setattr(option, k, v)
