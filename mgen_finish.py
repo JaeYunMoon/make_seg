@@ -34,14 +34,9 @@ def main(opt):
     removetxt = os.path.join(_sr,"Remove.txt") 
     removeTxt = compare_and_record(_image,_confirmIm,removetxt)
 
-    _label_remove = moveFile(_label,removeTxt,opt.SaveRoot,"label")
+    _label_remove = moveFile(_label,removeTxt,opt.SaveRoot,"label",".txt")
     _image_remove = moveFile(_image,removeTxt,opt.SaveRoot,"images")
     _seg_remove = moveFile(_seg,removeTxt,opt.SaveRoot,"chroma")
-    
-    
-
-
-
     # 크로마 이미지 저장소 
     # copy 이미지 저장소 
     # txt파일로 항목 확인 후 지울지 copy할지 

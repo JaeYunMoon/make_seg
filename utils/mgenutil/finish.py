@@ -2,7 +2,7 @@ import os
 import shutil
 from ..general import path_confirm
 import cv2 
-
+    
 # origin 과 confrim image file list를 읽어와서 
 # 없는 것들은 remove.txt 파일에 쓰고, 라인 확인 후 차이 맞으면 
 # 해당 txt 파일에 있는 image파일 삭제 or move 
@@ -25,7 +25,7 @@ def compare_and_record(folder1, folder2, output_file):
     
     return output_file
 
-def moveFile(folder1,txtFile,move,name):
+def moveFile(folder1,txtFile,move,name,suffix=".png"):
     with open(txtFile, 'r') as file:
         files_to_delete = file.read().splitlines()
     if move:
@@ -33,6 +33,7 @@ def moveFile(folder1,txtFile,move,name):
         print(f"MoveDirectorys : {move_save}",)
     deleted_files_count = 0 
     for file_name in files_to_delete:
+        file_name = file_name.replace(".png",suffix)
         file_path = os.path.join(folder1, file_name)
         if os.path.exists(file_path):
             if move:
