@@ -18,7 +18,7 @@ def parse_opt(known="False"):
     return parser.parse_known_args()[0] if known else parser.parse_args()
 
 def main(opt):
-    _label = changeAbsPath(opt.LabelPath,"-lp")
+    _label = changeAbsPath(opt.Label,"-lp")
     _labels = check_dir_list(_label,"-lp")
     _confirmIm = changeAbsPath(opt.ConfrimImage,"-cimg")
     _confirmIms = check_dir_list(_confirmIm,"-cimg")
@@ -26,7 +26,7 @@ def main(opt):
     _image = changeAbsPath(opt.OriginImage,"-oimg")
     _images = check_dir_list(_image,"-oimg")
 
-    _seg = changeAbsPath(opt.SegImPath,"-seg")
+    _seg = changeAbsPath(opt.SegImage,"-seg")
     _segs = check_dir_list(_seg,"-seg")
     
     _savepath = path_confirm(opt.SavePath)
@@ -34,9 +34,9 @@ def main(opt):
     removetxt = os.path.join(_sr,"Remove.txt") 
     removeTxt = compare_and_record(_image,_confirmIm,removetxt)
 
-    _label_remove = moveFile(_label,removeTxt,opt.SaveRoot,"label",".txt")
-    _image_remove = moveFile(_image,removeTxt,opt.SaveRoot,"images")
-    _seg_remove = moveFile(_seg,removeTxt,opt.SaveRoot,"chroma")
+    _image_remove = moveFile(_image,removeTxt,opt.fileMove,"images")
+    _label_remove = moveFile(_label,removeTxt,opt.fileMove,"label",".txt")
+    _seg_remove = moveFile(_seg,removeTxt,opt.fileMove,"chroma")
     # 크로마 이미지 저장소 
     # copy 이미지 저장소 
     # txt파일로 항목 확인 후 지울지 copy할지 
