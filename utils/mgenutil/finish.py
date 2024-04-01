@@ -2,7 +2,9 @@ import os
 import shutil
 from ..general import path_confirm
 import cv2 
+import numpy as np 
 from tqdm import tqdm
+from typing import List
     
 # origin 과 confrim image file list를 읽어와서 
 # 없는 것들은 remove.txt 파일에 쓰고, 라인 확인 후 차이 맞으면 
@@ -46,5 +48,30 @@ def moveFile(folder1,txtFile,move,saveRoot,name,suffix=".png"):
             print(f"File not found: {file_path}")
     print(f"Total deleted files: {deleted_files_count}")
 
-def chromaGenerating(chormapath):
-    pass
+def chromaGenerating(imgs,segPath,savePath):
+    for img in tqdm(imgs,desc="Generating Chroma Image :"):
+        n = os.path.basename(img)
+        sg = os.path.join(segPath,n)
+        Im = cv2.imread(img,cv2.IMREAD_COLOR)
+        segIm = cv2.imread(sg,cv2.IMREAD_COLOR)
+        saveName = os.path.join(savePath,n)
+
+        cIm = Im.copy()
+        try:
+            removeBackground = np.dstack((cIm,np.ones((cIm.shape[:-1]))*255))
+            segRgba = np.dstack(segIm,np.ones((segIm.shape[:-1])*255))
+
+            blue,green,red,alpha = segRgba[:,:,0], segRgba[:,:,1],segRgba[:,:,2],segRgba[:,:,3]
+            mask1 = (red == 107) & (green == 68) & (blue == 190) & (alpha == 255)   
+            mask2 = (red == 210) & (green == 96) & (blue == 94) & (alpha == 255)    
+            mask3 = (red == 123) & (green == 48) & (blue == 18) & (alpha == 255)
+            mask4 = (red == 137) & (green == 197) & (blue == 162) & (alpha == 255)
+            mask = (mask1 | mask2 | mask3 | mask4)
+
+            removeBackground[:,:,:4][np.invert(mask)] = [0, 0, 0, 0]
+            cv2.imwrite(saveName,removeBackground)
+
+        except:
+            print(sg)
+
+        

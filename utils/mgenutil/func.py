@@ -36,7 +36,7 @@ def segDrawObjectContour(datasets,refer,saveroot,txtSavePath):
                     contours,_ = cv2.findContours(img_mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
                     
                     if not contours:
-                        pass
+                        continue
                     for c in contours:
                         new_seg= cv2.drawContours(new_seg,[c],-1,(coord_bgr[2],coord_bgr[1],coord_bgr[0]),-1)
                         

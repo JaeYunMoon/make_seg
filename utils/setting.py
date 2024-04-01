@@ -42,24 +42,27 @@ def getDatasets(labels,
             if os.path.exists(n):
                 imagePath = n
             else:
-                raise NameError,f"{n} Path does not exist. Please check the Path"
+                pass 
+        
     
-
-        data = getDataInfo(
-            labelPath,
-            labelType,
-            imagePath,
-            clsYaml,
-            refer,
-            setting_color,
-            ns = 0
-        )
+        if not imagePath:
+            raise NameError,f"{n} Path does not exist. Please check the Path"
+        else:
+            data = getDataInfo(
+                labelPath,
+                labelType,
+                imagePath,
+                clsYaml,
+                refer,
+                setting_color,
+                ns = 0
+            )
 
         
     
 
         
-        allDataset.addData(data)
+            allDataset.addData(data)
     return allDataset
             
     
