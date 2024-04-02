@@ -12,6 +12,50 @@ conda activate mgen
 git clone https://github.com/JaeYunMoon/make_seg.git
 
 ```
+## 예시 
+### mgen_finish.py 
+
+```
+python mgen_finish.py --chroma True -cimg D:\add_storage\datasets\result\ConfrimImg -oimg D:\add_storage\datasets\train\images -l D:\add_storage\datasets\result\YoloForm -seg D:\add_storage\datasets\result\MgenFormSegimg -fm True
+
+```
+```
+# 위 파이썬 파일 설명 
+
+# -fm : 삭제 해야할 파일(conform image에서 지운 이미지) 삭제 하지 않고, 다른 폴더로 이동 (하드 용량 괜찮다면 True 지향)
+# --chroma : chroma 생성 시 True, 아니면 False (이전 납품 데이터 경우)
+# -cimg : ConfrimImg Directory 경로 
+# -oimg : 원본(unreal)이미지 - 삭제하기 위해 / 크로마 True인 경우 크로마 생성 하기 위해 
+# -l : yolo 형식의 라벨링 txt파일 모여있는 Directory 경로 - 삭제하기 위해 
+# -seg : Mgen형식의 segmentation Directory 경로 
+
+---
+# 추가 옵션 
+# -sr : 저장 경로 (Default = "./result/")
+# -refer : segmentation 색상 좌표 json 경로 (Default = "./refer/img_coor.json)
+```
+
+### mgen.py 
+
+```
+python mgen.py -lp D:\add_storage\datasets\json -ip D:\add_storage\datasets\train\images  -seg D:\add_storage\datasets\seg --confirm_image True 
+```
+```
+# 위 파이썬 파일 설명 
+# -lp : (unreal output) json Directory 경로 
+# -ip : (unreal output) image Directoy 경로 
+# -seg : (unreal output) segmentation Directory 경로 
+# --confirm_image : 데이터 확인 하기 위한 이미지 생성 Bool 
+---
+# 추가 옵션 
+# -sr : 저장 경로 (Default = "./result/")
+# -refer : segmentation 색상 좌표 json 경로 (Default = "./refer/img_coor.json)
+# -colo_set : 라벨(Class)별 데이터 확인 시 색상 정한 yaml파일 경로 
+# -b : 라벨 확인 시 polyLine 내부 색상 (default = False, 배경 색 없음)
+# -lw : 라벨 확인시 polyLine 두께
+
+```
+
 ## git clone 후 
 - 기존과 동일하게 데이터가 있는 Directory 에 파일을 옮겨서 실행 해도 된다. 
 ### 파일 이동 시 
