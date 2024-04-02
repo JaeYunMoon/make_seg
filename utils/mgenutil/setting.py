@@ -36,8 +36,8 @@ def getDatasets(
             if os.path.exists(n):
                 imagePath = n
 
-        if imagePath == None or segimagePath == None :
-           raise NameError("imagePath or segimagePath Error") 
+        if imagePath == None:
+           raise NameError(f"imagePath or segimagePath Error {imagePath}") 
         
         data = setDataInfo(
             labelPath= labelPath,

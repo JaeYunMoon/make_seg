@@ -14,7 +14,7 @@ def parse_opt(known="False"):
     parser.add_argument("-l","--label",dest="Label",default="./datasets/json",type=str)
     parser.add_argument("-fm","--fileMove",dest="fileMove",type=str2bool,default=False)
     parser.add_argument("-sr","--SaveRoot",dest="SaveRoot",type=str,default="./result/")
-    parser.add_argument("--refer",dest="referPath",type=str,default="./refer")
+    parser.add_argument("--refer",dest="referPath",type=str,default="./refer/img_coor.json")
     args = parser.parse_args()
     return parser.parse_known_args()[0] if known else parser.parse_args()
 
@@ -38,13 +38,13 @@ def main(opt):
     # File Remove 
     _image_remove = moveFile(_image,removeTxt,opt.fileMove,_sr,"images")
     _label_remove = moveFile(_label,removeTxt,opt.fileMove,_sr,"label",".txt")
-    _seg_remove = moveFile(_seg,removeTxt,opt.fileMove,_sr,"chroma")
+    _seg_remove = moveFile(_seg,removeTxt,opt.fileMove,_sr,"segmentation")
     # 크로마 이미지 저장소 
     # copy 이미지 저장소 
     # txt파일로 항목 확인 후 지울지 copy할지 
     
     # Chroma 
-    _referCoord = os.path.join(changeAbsPath(opt.referPath))
+    _referCoord = changeAbsPath(opt.referPath,'--refer')
     if os.path.isfile(_referCoord):
         _referCoordFile = _referCoord
     elif not os.path.isfile(_referCoord):
@@ -52,11 +52,11 @@ def main(opt):
         if os.path.exists(_referCoord):
             pass 
         else:
-            raise NameError,f"{_referCoordFile} is not exists"
+            raise NameError(f"{_referCoordFile} is not exists")
         
-    _savePath = path_confirm(os.path.join(_sr,".Chroma/"))
+    _savePath = path_confirm(os.path.join(_sr,"Chroma/"))
     if opt.Chroma:
-        chromaGenerating(_images,_savePath,_referCoordFile)
+        chromaGenerating(_images,_seg,_savePath,_referCoordFile)
 
 
 

@@ -46,7 +46,7 @@ def getDatasets(labels,
         
     
         if not imagePath:
-            raise NameError,f"{n} Path does not exist. Please check the Path"
+            raise NameError(f"{n} Path does not exist. Please check the Path")
         else:
             data = getDataInfo(
                 labelPath,

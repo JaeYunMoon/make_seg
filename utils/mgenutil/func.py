@@ -101,7 +101,7 @@ def segFindandDraw(data,newSeg,newSegPath,coord,coordbgr,epsilon = 0.0006,extra_
                     idx = i 
             cont = contours[idx] 
         else:
-            cont = contours[0]
+            cont = contours 
         epsilon2 = epsilon*cv2.arcLength(cont,True)
         approx1 = cv2.approxPolyDP(cont,epsilon2,True)
         cont = np.vstack((approx1))
